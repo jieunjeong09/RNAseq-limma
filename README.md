@@ -16,5 +16,24 @@ Some data series include count data in data series matrix, but not in this serie
 
 **2** The analytical workflow
 
-'NP2adapt_NEW.R' finds direrential genes using edgeR, voom and limma, finds significant biological processes and pathways and other findings that WILL BE DOCUMENTED SOON.
+'mrna.kieun.R' finds direrential genes using edgeR, voom and limma, finds significant biological processes and pathways and other findings.
+
+A. Reads RDS files
+
+B. Makes two version of counts file by changing identifiers to Symbol and to Entrez (required by ReactomePA package for biological pathways.
+
+C. Shows the heatmap for 100 most variable genes.
+
+D. Shows results of PCA analysis in two ways: standard and vectors from Control to IFNg treatment in the same cell line.
+
+E. Finds differential genes using edgeR, voom and limma workflow.
+
+F. Shows gene set analysis for GO Biological Precess and Reactome pathways.
+
+**3** Plan to add on February 2
+
+Comparison with potentially better identification of differential genes using CellLine as a confounding factor in "design",
+it does not change most significant genes sets but it changes the set of differential genes etc.
+
+
 
