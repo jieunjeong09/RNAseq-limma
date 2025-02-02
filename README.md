@@ -16,7 +16,7 @@ Some data series include count data in data series matrix, but not in this serie
 
 **2** The analytical workflow
 
-`mrna.kieun.R` finds direrential genes using edgeR, voom and limma, finds significant biological processes and pathways and other findings.
+`mrna.jieun.R` finds direrential genes using edgeR, voom and limma, finds significant biological processes and pathways and other findings.
 
 A. Reads RDS files
 
