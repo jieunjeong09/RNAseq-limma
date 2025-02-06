@@ -30,10 +30,23 @@ E. Finds differential genes using edgeR, voom and limma workflow.
 
 F. Shows gene set analysis for GO Biological Precess and Reactome pathways.
 
-**3** Plan to add on February 2
+**3** Comparing two designs and two ranking methods
 
-Comparison with potentially better identification of differential genes using CellLine as a confounding factor in "design",
-it does not change most significant genes sets but it changes the set of differential genes etc.
+`limma` workflow may use simpler approach `design <- model.matrix(~ 0 + treatment)` or include the confounding factor `design <- model.matrix(~ 0 + treatment + cell_line)`.  Subsequently, when we form gene list for gsea analysis, we can rank it by fold change or by adjusted p-value (of course, other approaches exist too).  
+
+To simplify R code, we run two scripts:
+
+A. `compare_limma_1.R` reads RDS objects saved by `mrna.jieun.R` and saves two gsea objects.  It also visualizes differences between fold changes between two designs, which are small, and adjusted p-values of genes which are large.  Thus later we use adjusted p-values.
+
+B. `compare_limma_2.R reads RDS objects save by `compare_limma_1.R and compare the results.
+Comparison with potentially better identification of differential genes using `cell_line` as a confounding factor in "design", ie. `design <- model.matrix(~ 0 + treatment)` 
+and `design <- model.matrix(~ 0 + treatment + cell_line)`
+
+If we rank genes according to fold change, the differences in ranking of values were small and the differences in GO Biological Process.
+
+But the values of adjusted p-values change dramatically, and so the results for GO Biological Process when we use this ranking.  Including `cell_line` nearly doubles the number of identified processes, and identifies roles of almost 5 times more genes.  The most dramatic example is WNT5A that does not occur in any process when `cell_line` is excluded from the design, and in 210 if it is included.
+
+This shows importance of including the confounding factor in the analysis.
 
 
 
