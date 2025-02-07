@@ -1,6 +1,7 @@
+setwd('/Users/jieun/Work/Git_test/RNAseq_limma')
 library(tidyverse, quietly=T)
+library(dplyr)
 library(janitor, quietly=T)
-library(edgeR, quietly=T)
 
 # making input tables
 hugo <- readRDS('HUGO.RDS')
@@ -21,16 +22,21 @@ countsN <- as.matrix(column_to_rownames(countsN, "Entrez"))
 ### Definitions for limma
 treatment <- as.factor(samples$Treatment)
 cell_line <- as.factor(samples$CellLine)
+library(edgeR, quietly=T)
 design <- model.matrix(~ 0 + treatment)
-# alternative:
-# design <- model.matrix(~0 + treatment + cell_line[-1])
 contrast <- makeContrasts(treatmentIFNg - treatmentControl, levels = design)
 
 # Normalization for limma
 dge <- DGEList(counts = countsAS) # TMM normalization, reformmating
 dge <- calcNormFactors(dge)
 v <- voom(countsAS, design, plot = T) # log normalization and adjustment
-
+# checking the normalized distribution of gene expression
+A <- as.data.frame(v$E)
+A <- rownames_to_column(A,var='gene')
+AL <- pivot_longer(A,-gene,names_to = "sample", values_to = "logExpr")
+AL$sample <- as.factor(AL$sample)
+p <- ggplot(AL,aes(x=sample,y=logExpr)) + geom_violin(trim=F,width=0.8)
+p + stat_summary(fun.data=mean_sdl, geom="pointrange", color="red",fun.args=list(mult=1))
 ### Clustering on v$E
 library(SummarizedExperiment)
 
@@ -91,16 +97,15 @@ fit3 <- eBayes(fit2)
 results <- topTable(fit3, adjust.method = "BH", coef = 1, number = Inf)
 
 head(results)
+saveRDS(results,"Limma_1.RDS")
 
 ### Visualization of DEG
 
 ## Volcano plot
 
 # Volcano plot using volcanoplot()
-volcanoplot(fit3, highlight = 10)
+volcanoplot(fit3, highlight = 10, names = rownames(fit3$coefficients))
 
-fit3$genes <- rownames(countsAS)
-volcanoplot(fit3, highlight = 10, names = fit3$genes)
 
 ## Volcano plot using ggplot2
 top_genes <-
@@ -117,11 +122,9 @@ results %>%
              label = Label)) +
   geom_point() +
   geom_text_repel(col = "blue", max.overlaps = 15)
-
+### limma with confounding factor: cell line
 #### GSEA
 library(clusterProfiler)
-library(ReactomePA)
-library(org.Hs.eg.db)
 
 geneList <- results[order(results$logFC,decreasing = T),'logFC']
 
@@ -135,6 +138,7 @@ gsea_result <- gseGO(geneList = geneList,
 
 
 gsea_result %>% as.data.frame %>% head()
+saveRDS(gsea_result,"GSEA_1.RDS")
 
 
 ### GSEA visualization:
@@ -160,8 +164,8 @@ dotplot(gsea_result, showCategory = 15)
 ### Reactome
 geneListN <- geneList
 
-names(geneListN) <- f_hgnc$NCBI_Gene_ID[match(names(geneListN), 
-                                              f_hgnc$Approved_symbol)]
+names(geneListN) <- hugo$Entrez[match(names(geneListN), 
+                                              hugo$Symbol)]
 
 reactome_result <- gsePathway(geneList = geneListN, pvalueCutoff = 0.05)
 
@@ -184,3 +188,42 @@ gseaplot(reactome_result, geneSetID = "R-HSA-449147")
 
 # Dotplot for Reactome
 dotplot(reactome_result, showCategory = 15)
+
+### limma with a potentially better design
+
+
+# alternative:
+design <- model.matrix(~0 + treatment + cell_line)
+contrast <- makeContrasts(treatmentIFNg - treatmentControl, levels = design)
+
+# Normalization for limma
+dge <- DGEList(counts = countsAS) # TMM normalization, reformmating
+dge <- calcNormFactors(dge)
+v <- voom(countsAS, design, plot = T)
+
+# Fitting by limma
+fit <- lmFit(v, design) # linear
+
+### Control treatment setup
+fit2 <- contrasts.fit(fit, contrast)
+fit3 <- eBayes(fit2)
+
+### Check the result
+results <- topTable(fit3, adjust.method = "BH", coef = 1, number = Inf)
+
+head(results)
+saveRDS(results,"Limma_2.RDS")
+
+geneList <- results[order(results$logFC,decreasing = T),'logFC']
+
+names(geneList) <-
+  rownames(results[order(results$logFC,decreasing = T),])
+
+gsea_result <- gseGO(geneList = geneList,
+                     OrgDb = org.Hs.eg.db,
+                     key = "SYMBOL",
+                     ont = "BP")
+
+
+gsea_result %>% as.data.frame %>% head()
+saveRDS(gsea_result,"GSEA_2.RDS")
