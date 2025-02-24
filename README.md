@@ -16,9 +16,11 @@ Some data series include count data in data series matrix, but not in this serie
 
 **2** The analytical workflow
 
-`mrna.jieun.R` finds direrential genes using edgeR, voom and limma, finds significant biological processes and pathways and other findings.
+`mrna.jieun.R` finds direrential genes using edgeR, voom and limma, finds significant biological processes.
+This vignette is meant to present completely initial processing, and thus it has chunks with downloads and making data tables.
 
-A. Reads RDS files
+
+A. Reads RDS files (if not computed already)
 
 B. Makes two version of counts file by changing identifiers to Symbol and to Entrez (required by ReactomePA package for biological pathways.
 
@@ -28,25 +30,15 @@ D. Shows results of PCA analysis in two ways: standard and vectors from Control 
 
 E. Finds differential genes using edgeR, voom and limma workflow.
 
-F. Shows gene set analysis for GO Biological Precess and Reactome pathways.
+F. Shows gene set analysis for GO Biological Process.
 
-**3** Comparing two designs and two ranking methods
+**3** Comparing two designs
 
-`limma` workflow may use simpler approach `design <- model.matrix(~ 0 + treatment)` or include the confounding factor `design <- model.matrix(~ 0 + treatment + cell_line)`.  Subsequently, when we form gene list for gsea analysis, we can rank it by fold change or by adjusted p-value (of course, other approaches exist too).  
-
-To simplify R code, we run two scripts:
-
-A. `compare_limma_1.R` reads RDS objects saved by `mrna.jieun.R` and saves two gsea objects.  It also visualizes differences between fold changes between two designs, which are small, and adjusted p-values of genes which are large.  Thus later we use adjusted p-values.
-
-B. `compare_limma_2.R reads RDS objects save by `compare_limma_1.R and compare the results.
-Comparison with potentially better identification of differential genes using `cell_line` as a confounding factor in "design", ie. `design <- model.matrix(~ 0 + treatment)` 
-and `design <- model.matrix(~ 0 + treatment + cell_line)`
-
-If we rank genes according to fold change, the differences in ranking of values were small and the differences in GO Biological Process.
-
-But the values of adjusted p-values change dramatically, and so the results for GO Biological Process when we use this ranking.  Including `cell_line` nearly doubles the number of identified processes, and identifies roles of almost 5 times more genes.  The most dramatic example is WNT5A that does not occur in any process when `cell_line` is excluded from the design, and in 210 if it is included.
-
+The design that includes CellLine leads to identification of several times more significant biological processes,
+it produces much smaller adjusted p-values and thus more genes sets with adjusted p-value below 0.05.
 This shows importance of including the confounding factor in the analysis.
+
+**4** Further plans: more steps in gene set analysis
 
 
 
