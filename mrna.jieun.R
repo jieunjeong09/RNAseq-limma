@@ -2,7 +2,6 @@ setwd('/Users/jieun/Work/Git_test/RNAseq_limma')
 library(tidyverse, quietly=T)
 library(dplyr)
 library(janitor, quietly=T)
-
 # making input tables
 hugo <- readRDS('HUGO.RDS')
 samples <- readRDS('GSE263611_key.RDS') %>% filter(Assay == "RNA-seq")
