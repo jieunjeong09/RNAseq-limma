@@ -28,7 +28,7 @@ C. Displays a heatmap of the 100 most variable genes.
 
 D. Presents PCA results in two ways: standard and vectors from Control to IFNg treatment in the same cell line.
 
-E. Identifies differential genes using edgeR-voom-limma workflow.
+E. Identifies differential genes using the edgeR-voom-limma workflow.
 
 F. Shows gene set analysis for GO Biological Process.
 
