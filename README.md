@@ -1,4 +1,4 @@
-# RNAseq workflow with download from NCBI GEO, limma, PCA etc.
+# RNAseq workflow: Automated GEO Download, limma Analysus, and PCA.
 
 **1** File downloads and making data tables
 
