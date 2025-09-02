@@ -24,7 +24,7 @@ A. Reads RDS files (if not computed already)
 
 B. Makes two version of counts file by changing identifiers to Symbol and to Entrez (required by ReactomePA package for biological pathways.
 
-C. Displays the heatmap for 100 most variable genes.
+C. Displays a heatmap of the 100 most variable genes.
 
 D. Presents PCA resultss in two ways: standard and vectors from Control to IFNg treatment in the same cell line.
 
