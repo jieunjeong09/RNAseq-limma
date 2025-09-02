@@ -1,4 +1,4 @@
-# RNAseq workflow: Automated GEO Download, limma Analysus, and PCA.
+# RNA-seq workflow: Automated GEO Download, limma Analysis, and PCA.
 
 **1** File downloads and making data tables
 
