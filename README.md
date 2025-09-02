@@ -8,7 +8,7 @@ Different programs require different identifiers.  For example, RSEM uses Ensemb
 
 Processing requires meta data key that can use information from soft file or series matrix file, the latter has a format that is easier to use.  In either case, one has to modify this script for other data series.
 
-`make_key.R` downloads the series matrix and makes `GSE263611_key.RDS` of table with rownames that identify samples and columns that provide GEO `Accession`, `Treatment`, `CellLine` and `Assay`.  For nicer tables, sample with accessions GSM8195226 to  GSM8195233 get sample names `S26` to `S33`.  Short names are practical for GEO data samples, for larger datasets, more terminal digits can be retained.
+`make_key.R` downloads the series matrix and makes `GSE263611_key.RDS` of table with rownames that identify samples and columns that provide GEO `Accession`, `Treatment`, `CellLine` and `Assay`.  For nicer tables, sample with accessions GSM8195226 to  GSM8195233 get sample names `S26` to `S33`.  Short names are practical for GEO samples; for larger datasets, more terminal digits can be retained.
 
 Some data series include count data in data series matrix, but not in this series.
 
