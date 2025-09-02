@@ -26,7 +26,7 @@ B. Makes two version of counts file by changing identifiers to Symbol and to Ent
 
 C. Displays a heatmap of the 100 most variable genes.
 
-D. Presents PCA resultss in two ways: standard and vectors from Control to IFNg treatment in the same cell line.
+D. Presents PCA results in two ways: standard and vectors from Control to IFNg treatment in the same cell line.
 
 E. Identifies differential genes using edgeR-voom-limma workflow.
 
