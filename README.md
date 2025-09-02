@@ -24,11 +24,11 @@ A. Reads RDS files (if not computed already)
 
 B. Makes two version of counts file by changing identifiers to Symbol and to Entrez (required by ReactomePA package for biological pathways.
 
-C. Shows the heatmap for 100 most variable genes.
+C. Displays the heatmap for 100 most variable genes.
 
-D. Shows results of PCA analysis in two ways: standard and vectors from Control to IFNg treatment in the same cell line.
+D. Presents PCA resultss in two ways: standard and vectors from Control to IFNg treatment in the same cell line.
 
-E. Finds differential genes using edgeR, voom and limma workflow.
+E. Identifies differential genes using edgeR-voom-limma workflow.
 
 F. Shows gene set analysis for GO Biological Process.
 
