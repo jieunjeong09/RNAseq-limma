@@ -1,6 +1,6 @@
 # RNA-seq workflow: Automated GEO Download, limma Analysis, and PCA
 
-**1** File downloads and making data tables
+**1** File downloads and data table creation
 
 `make_Hugo_identifiers.R` downloads HGNC data file and makes `HUGO.RDS` of the table of gene `Type` and identifiers: `Ensembl`, `Symbol` and `Entrez`.
 
