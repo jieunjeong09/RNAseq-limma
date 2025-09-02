@@ -4,7 +4,7 @@
 
 `make_Hugo_identifiers.R` downloads HGNC data file and makes `HUGO.RDS` of the table of gene `Type` and identifiers: `Ensembl`, `Symbol` and `Entrez`.
 
-Different programs require different identifiers.  For example, RSEM uses Ensembl which annotates more genes.  This increases the chance of identifying genes that lack Entrez IDs or HGNC-approved symbols.
+Different programs require different identifiers.  For example, RSEM uses Ensembl, which annotates more genes.  This increases the chance of identifying genes that lack Entrez IDs or HGNC-approved symbols.
 
 Processing requires meta data key that can use information from soft file or series matrix file, the latter has a format that is easier to use.  In either case, one has to modify this script for other data series.
 
