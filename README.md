@@ -16,7 +16,7 @@ Some data series include count data in data series matrix, but not in this serie
 
 **2** The analytical workflow
 
-`mrna.jieun.R` finds direrential genes using edgeR, voom and limma, finds significant biological processes.
+`mrna.jieun.R` finds differential genes using edgeR, voom and limma, finds significant biological processes.
 This vignette is meant to present completely initial processing, and thus it has chunks with downloads and making data tables.
 
 
