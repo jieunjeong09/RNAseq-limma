@@ -36,7 +36,7 @@ F. Shows gene set analysis for GO Biological Process.
 
 The design that includes CellLine leads to identification of several times more significant biological processes,
 it produces much smaller adjusted p-values and thus more genes sets with adjusted p-value below 0.05.
-This shows importance of including the confounding factor in the analysis.
+This highlights the importance of including the confounding factor in the analysis.
 
 **4** Further plans: more steps in gene set analysis
 
