@@ -38,7 +38,4 @@ The design that includes CellLine leads to identification of several times more 
 it produces much smaller adjusted p-values and thus more genes sets with adjusted p-value below 0.05.
 This highlights the importance of including confounding factors in the analysis.
 
-**4** Planned improvements: expanding genes set analysis with additional enrichment methods (e.g. MSigDB).
-
-
 
